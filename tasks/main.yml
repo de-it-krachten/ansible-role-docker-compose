@@ -1,0 +1,7 @@
+---
+
+- include_tasks: check.yml
+- include_tasks: binary.yml
+  when: docker_compose_type == 'binary'
+- include_tasks: pip.yml
+  when: docker_compose_type == 'pip'

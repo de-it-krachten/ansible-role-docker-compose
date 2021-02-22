@@ -1,0 +1,80 @@
+---
+
+- name: Search for docker-compose executable
+  shell: which docker-compose
+  changed_when: false
+  failed_when: false
+  check_mode: false
+  register: docker_compose_exec
+  
+- block:
+
+    - name: Get filetype of the execurable
+      stat:
+        path: "{{ docker_compose_exec.stdout }}"
+      register: docker_compose_fileinfo
+
+    - name: Check if we are dealing with python pip version
+      fail:
+        msg:
+          - "docker-compose already installed using pypi package"
+          - "It can be found here : {{ docker_compose_exec.stdout }}"
+      when:
+        - docker_compose_fileinfo.stat.mimetype is search('python')
+
+  when:
+    - docker_compose_exec.stdout is defined
+    - docker_compose_exec.stdout|length > 0
+
+- name: Get docker-compose version installed
+  shell: >
+    {{ docker_compose_path }} --version | awk '{print $3}' | sed "s/,$//"
+  changed_when: no
+  failed_when: no
+  register: docker_compose_version_installed
+
+- name: Set installed version as fact
+  set_fact:
+     docker_compose_version_installed: "{{ 'N/A' if docker_compose_version_installed.stdout|length == 0 else docker_compose_version_installed.stdout }}"
+
+- name: Get latest docker-compose release info
+  uri:
+    url: "{{ docker_compose_api+'/releases/latest' }}"
+  check_mode: no
+  register: docker_compose_version_info
+
+- name: Get latest release tag
+  set_fact:
+    docker_compose_version_latest: "{{ docker_compose_version_info.json.tag_name }}"
+
+- name: Get all docker-compose releases info
+  uri:
+    url: "{{ docker_compose_api+'/releases?per_page=1000' }}"
+  check_mode: no
+  register: docker_compose_version_info
+
+- set_fact:
+    docker_compose_version_info: "{{ docker_compose_version_info.json | json_query(query) | first }}"
+  vars:
+    query: "[?tag_name=='{{ docker_compose_version_latest if docker_compose_version == 'latest' else docker_compose_version }}']"
+
+- name: Show docker-compose release
+  debug:
+    msg:
+      - "docker-compose latest release    : {{ docker_compose_version_latest }}"
+      - "docker-compose requested release : {{ docker_compose_version }}"
+      - "docker-compose installed release : {{ docker_compose_version_installed }}"
+
+- name: Get binary location
+  set_fact:
+    docker_compose_bin_url: "{{ docker_compose_version_info.assets | json_query(query) | first }}"
+  vars:
+    query: "[?name=='docker-compose-{{ docker_compose_platform }}'].browser_download_url"
+
+- name: Download the docker_compose binary
+  get_url:
+    url: "{{ docker_compose_bin_url }}"
+    dest: "{{ docker_compose_path }}"
+    owner: "{{ docker_compose_owner }}"
+    group: "{{ docker_compose_group }}"
+    mode: "{{ docker_compose_mode }}"
