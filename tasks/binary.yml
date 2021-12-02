@@ -1,6 +1,6 @@
 ---
 
-- name: Search for docker-compose executable
+- name: Search for docker-compose executable  # noqa command-instead-of-shell
   shell: which docker-compose
   changed_when: false
   failed_when: false
@@ -28,6 +28,7 @@
 
 - name: Get docker-compose version installed
   shell: >
+    set -o pipefail
     {{ docker_compose_path }} --version | sed -r "s/.* (1\.[0-9\.]*).*/\1/;s/(.*) v//"
   changed_when: no
   failed_when: no
@@ -35,7 +36,7 @@
 
 - name: Set installed version as fact
   set_fact:
-     docker_compose_version_installed: "{{ 'N/A' if docker_compose_version_installed.stdout|length == 0 else docker_compose_version_installed.stdout }}"
+    docker_compose_version_installed: "{{ 'N/A' if docker_compose_version_installed.stdout|length == 0 else docker_compose_version_installed.stdout }}"
 
 - name: Get latest docker-compose release info
   uri:
@@ -59,7 +60,8 @@
   check_mode: no
   register: docker_compose_version_info
 
-- set_fact:
+- name: Get latest docker-compose version
+  set_fact:
     docker_compose_version_info: "{{ docker_compose_version_info.json | json_query(query) | first }}"
   vars:
     query: "[?tag_name=='{{ docker_compose_version_latest if docker_compose_version == 'latest' else docker_compose_version }}']"
