@@ -84,3 +84,6 @@
     owner: "{{ docker_compose_owner }}"
     group: "{{ docker_compose_group }}"
     mode: "{{ docker_compose_mode }}"
+  environment:
+    https_proxy: "{{ https_proxy | default('') }}"
+    http_proxy: "{{ http_proxy | default('') }}"
