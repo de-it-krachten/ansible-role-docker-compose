@@ -40,6 +40,9 @@
 - name: Get latest docker-compose release info
   uri:
     url: "{{ docker_compose_api+'/releases/latest' }}"
+  environment:
+    https_proxy: "{{ https_proxy | default('') }}"
+    http_proxy: "{{ http_proxy | default('') }}"
   check_mode: no
   register: docker_compose_version_info
 
@@ -50,6 +53,9 @@
 - name: Get all docker-compose releases info
   uri:
     url: "{{ docker_compose_api+'/releases?per_page=1000' }}"
+  environment:
+    https_proxy: "{{ https_proxy | default('') }}"
+    http_proxy: "{{ http_proxy | default('') }}"
   check_mode: no
   register: docker_compose_version_info
 
@@ -78,3 +84,6 @@
     owner: "{{ docker_compose_owner }}"
     group: "{{ docker_compose_group }}"
     mode: "{{ docker_compose_mode }}"
+  environment:
+    https_proxy: "{{ https_proxy | default('') }}"
+    http_proxy: "{{ http_proxy | default('') }}"
