@@ -1,6 +1,6 @@
 ---
 
-- name: Search for docker-compose executable
+- name: Search for docker-compose executable  # noqa command-instead-of-shell
   shell: which docker-compose
   changed_when: false
   failed_when: false
