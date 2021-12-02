@@ -27,16 +27,18 @@
     - docker_compose_exec.stdout|length > 0
 
 - name: Get docker-compose version installed
-  shell: >
+  shell: |
     set -o pipefail
     {{ docker_compose_path }} --version | sed -r "s/.* (1\.[0-9\.]*).*/\1/;s/(.*) v//"
+  args:
+    executable: /bin/bash
   changed_when: no
   failed_when: no
   register: docker_compose_version_installed
 
 - name: Set installed version as fact
   set_fact:
-    docker_compose_version_installed: "{{ 'N/A' if docker_compose_version_installed.stdout|length == 0 else docker_compose_version_installed.stdout }}"
+    docker_compose_version_installed: "{{ 'N/A' if docker_compose_version_installed.stdout|length == 0 else ('v'+docker_compose_version_installed.stdout) }}"
 
 - name: Get latest docker-compose release info
   uri:
