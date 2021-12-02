@@ -28,7 +28,7 @@
 
 - name: Get docker-compose version installed
   shell: >
-    {{ docker_compose_path }} --version | awk '{print $3}' | sed "s/,$//"
+    {{ docker_compose_path }} --version | sed -r "s/.* (1\.[0-9\.]*).*/\1/;s/(.*) v//"
   changed_when: no
   failed_when: no
   register: docker_compose_version_installed
