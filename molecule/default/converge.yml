@@ -2,9 +2,8 @@
 
 - name: Converge
   hosts: all
-  vars:
+  vars: null
   tasks:
-
-    - name: "Include role 'ansible-role-docker_compose'"
+    - name: Include role 'ansible-role-docker_compose'
       include_role:
-        name: "ansible-role-docker_compose"
+        name: ansible-role-docker_compose

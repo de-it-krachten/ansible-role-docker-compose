@@ -4,7 +4,7 @@
 role: ansible-role-docker_compose
 role_short: docker_compose
 role_description: |
-  WRITE HERE
+  Installs docker-compose
 
 # Supported platform
 platforms:
@@ -47,6 +47,7 @@ galaxy:
 # Github
 github:
   active: true
+  self_hosted: false
   owner: de-it-krachten
   repo: ansible-role-docker_compose
 
