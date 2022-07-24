@@ -7,7 +7,8 @@
   check_mode: false
   register: docker_compose_exec
   
-- block:
+- name: Get filetype
+  block:
 
     - name: Get filetype of the executable
       stat:
