@@ -14,6 +14,7 @@ Supported platforms
 - Red Hat Enterprise Linux 9<sup>1</sup>
 - CentOS 7
 - RockyLinux 8
+- RockyLinux 9
 - OracleLinux 8
 - AlmaLinux 8
 - AlmaLinux 9
@@ -63,6 +64,7 @@ docker_compose_mode: '0755'
 <pre><code>
 - name: sample playbook for role 'docker_compose'
   hosts: all
+  become: "{{ molecule['converge']['become'] | default('yes') }}"
   vars:
   tasks:
     - name: Include role 'docker_compose'
