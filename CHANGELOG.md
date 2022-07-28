@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.1.0...v1.2.0) (2022-07-28)
+
+
+### Features
+
+* Implement ansible-lint v6 support ([3191395](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/319139591fa4c526c325ac4a6bff35088626c30f))
+
 # [1.1.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.0.1...v1.1.0) (2022-07-09)
 
 
