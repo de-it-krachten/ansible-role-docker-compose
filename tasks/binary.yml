@@ -7,9 +7,10 @@
   check_mode: false
   register: docker_compose_exec
   
-- block:
+- name: Get file type
+  block:
 
-    - name: Get filetype of the execurable
+    - name: Get filetype of the executable
       stat:
         path: "{{ docker_compose_exec.stdout }}"
       register: docker_compose_fileinfo
