@@ -32,7 +32,7 @@ Note:
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
-# type of installation (binary or pip)
+# type of installation (binary/pip/both)
 docker_compose_type: binary
 
 # API endpoint to get latest version 
