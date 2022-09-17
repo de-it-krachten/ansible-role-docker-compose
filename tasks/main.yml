@@ -2,6 +2,6 @@
 
 - include_tasks: check.yml
 - include_tasks: binary.yml
-  when: docker_compose_type == 'binary'
+  when: docker_compose_type is search('^(binary|both)$')
 - include_tasks: pip.yml
-  when: docker_compose_type == 'pip'
+  when: docker_compose_type is search('^(pip|both)$')
