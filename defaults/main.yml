@@ -3,7 +3,7 @@
 # type of installation (binary/pip/both)
 docker_compose_type: binary
 
-# API endpoint to get latest version 
+# API endpoint to get latest version
 docker_compose_api: https://api.github.com/repos/docker/compose
 
 # Download location for binary
