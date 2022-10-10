@@ -1,22 +1,25 @@
 ---
 
 - name: Search for docker-compose executable  # noqa command-instead-of-shell
-  shell: which docker-compose
+  ansible.builtin.shell: which docker-compose
   changed_when: false
   failed_when: false
   check_mode: false
   register: docker_compose_exec
-  
+
 - name: Get filetype
+  when:
+    - docker_compose_exec.stdout is defined
+    - docker_compose_exec.stdout | length > 0
   block:
 
     - name: Get filetype of the executable
-      stat:
+      ansible.builtin.stat:
         path: "{{ docker_compose_exec.stdout }}"
       register: docker_compose_fileinfo
 
     - name: Check if we are dealing with python pip version
-      fail:
+      ansible.builtin.fail:
         msg:
           - "docker-compose already installed using pip package instead of standalone binary"
           - "It can be found here : {{ docker_compose_exec.stdout }}"
@@ -25,14 +28,10 @@
         - docker_compose_fileinfo.stat.mimetype is search('python')
 
     - name: Check if we are dealing with binary version
-      fail:
+      ansible.builtin.fail:
         msg:
           - "docker-compose already installed using binary instead of pip version"
           - "It can be found here : {{ docker_compose_exec.stdout }}"
       when:
         - docker_compose_type == 'pip'
         - docker_compose_fileinfo.stat.mimetype is search('application/x-pie-executable')
-
-  when:
-    - docker_compose_exec.stdout is defined
-    - docker_compose_exec.stdout|length > 0

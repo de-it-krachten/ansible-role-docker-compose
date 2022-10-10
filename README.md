@@ -5,6 +5,15 @@
 
 Installs docker-compose
 
+
+## Dependencies
+
+#### Roles
+None
+
+#### Collections
+- community.general
+
 ## Platforms
 
 Supported platforms
@@ -35,7 +44,7 @@ Note:
 # type of installation (binary/pip/both)
 docker_compose_type: binary
 
-# API endpoint to get latest version 
+# API endpoint to get latest version
 docker_compose_api: https://api.github.com/repos/docker/compose
 
 # Download location for binary
@@ -59,6 +68,7 @@ docker_compose_mode: '0755'
 
 
 
+
 ## Example Playbook
 ### molecule/default/converge.yml
 <pre><code>
@@ -67,6 +77,6 @@ docker_compose_mode: '0755'
   become: "{{ molecule['converge']['become'] | default('yes') }}"
   tasks:
     - name: Include role 'docker_compose'
-      include_role:
+      ansible.builtin.include_role:
         name: docker_compose
 </pre></code>
