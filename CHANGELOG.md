@@ -1,3 +1,12 @@
+# [1.3.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.2.0...v1.3.0) (2022-10-12)
+
+
+### Features
+
+* Add support for both pip and binary package ([a09be6c](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/a09be6c68b025c03c1762d88eed6a02f2440e50c))
+* Move to FQCN ([87f1cf2](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/87f1cf2af04f653dcf15a5bfea2ffa0b4bbc87dd))
+* Update CI to latest standards ([369199e](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/369199e18d19d4b51bce02ec574c6bcb7900500d))
+
 # [1.2.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.1.0...v1.2.0) (2022-07-28)
 
 
