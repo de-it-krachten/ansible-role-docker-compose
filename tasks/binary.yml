@@ -1,34 +1,33 @@
 ---
 
 - name: Search for docker-compose executable  # noqa command-instead-of-shell
-  shell: which docker-compose
+  ansible.builtin.shell: which docker-compose
   changed_when: false
   failed_when: false
   check_mode: false
   register: docker_compose_exec
-  
+
 - name: Get file type
+  when:
+    - docker_compose_exec.stdout is defined
+    - docker_compose_exec.stdout | length > 0
   block:
 
     - name: Get filetype of the executable
-      stat:
+      ansible.builtin.stat:
         path: "{{ docker_compose_exec.stdout }}"
       register: docker_compose_fileinfo
 
     - name: Check if we are dealing with python pip version
-      fail:
+      ansible.builtin.fail:
         msg:
           - "docker-compose already installed using pypi package"
           - "It can be found here : {{ docker_compose_exec.stdout }}"
       when:
         - docker_compose_fileinfo.stat.mimetype is search('python')
 
-  when:
-    - docker_compose_exec.stdout is defined
-    - docker_compose_exec.stdout|length > 0
-
 - name: Get docker-compose version installed
-  shell: |
+  ansible.builtin.shell: |
     set -o pipefail
     {{ docker_compose_path }} --version | sed -r "s/.* (1\.[0-9\.]*).*/\1/;s/(.*) v//"
   args:
@@ -38,12 +37,12 @@
   register: docker_compose_version_installed
 
 - name: Set installed version as fact
-  set_fact:
-    docker_compose_version_installed: "{{ 'N/A' if docker_compose_version_installed.stdout|length == 0 else ('v'+docker_compose_version_installed.stdout) }}"
+  ansible.builtin.set_fact:
+    docker_compose_version_installed: "{{ 'N/A' if docker_compose_version_installed.stdout | length == 0 else ('v' + docker_compose_version_installed.stdout) }}"
 
 - name: Get latest docker-compose release info
-  uri:
-    url: "{{ docker_compose_api+'/releases/latest' }}"
+  ansible.builtin.uri:
+    url: "{{ docker_compose_api + '/releases/latest' }}"
   environment:
     https_proxy: "{{ https_proxy | default('') }}"
     http_proxy: "{{ http_proxy | default('') }}"
@@ -51,12 +50,12 @@
   register: docker_compose_version_info
 
 - name: Get latest release tag
-  set_fact:
+  ansible.builtin.set_fact:
     docker_compose_version_latest: "{{ docker_compose_version_info.json.tag_name }}"
 
 - name: Get all docker-compose releases info
-  uri:
-    url: "{{ docker_compose_api+'/releases?per_page=1000' }}"
+  ansible.builtin.uri:
+    url: "{{ docker_compose_api + '/releases?per_page=1000' }}"
   environment:
     https_proxy: "{{ https_proxy | default('') }}"
     http_proxy: "{{ http_proxy | default('') }}"
@@ -64,26 +63,26 @@
   register: docker_compose_version_info
 
 - name: Get latest docker-compose version
-  set_fact:
+  ansible.builtin.set_fact:
     docker_compose_version_info: "{{ docker_compose_version_info.json | json_query(query) | first }}"
   vars:
     query: "[?tag_name=='{{ docker_compose_version_latest if docker_compose_version == 'latest' else docker_compose_version }}']"
 
 - name: Show docker-compose release
-  debug:
+  ansible.builtin.debug:
     msg:
       - "docker-compose latest release    : {{ docker_compose_version_latest }}"
       - "docker-compose requested release : {{ docker_compose_version }}"
       - "docker-compose installed release : {{ docker_compose_version_installed }}"
 
 - name: Get binary location
-  set_fact:
+  ansible.builtin.set_fact:
     docker_compose_bin_url: "{{ docker_compose_version_info.assets | json_query(query) | first }}"
   vars:
     query: "[?name=='docker-compose-{{ docker_compose_platform }}'].browser_download_url"
 
 - name: Download the docker_compose binary
-  get_url:
+  ansible.builtin.get_url:
     url: "{{ docker_compose_bin_url }}"
     dest: "{{ docker_compose_path }}"
     owner: "{{ docker_compose_owner }}"
