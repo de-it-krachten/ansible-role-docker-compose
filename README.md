@@ -6,6 +6,7 @@
 Installs docker-compose
 
 
+
 ## Dependencies
 
 #### Roles
@@ -25,6 +26,7 @@ Supported platforms
 - RockyLinux 8
 - RockyLinux 9
 - OracleLinux 8
+- OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
 - Debian 10 (Buster)
@@ -34,6 +36,7 @@ Supported platforms
 - Ubuntu 22.04 LTS
 - Fedora 35
 - Fedora 36
+- Alpine 3
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
@@ -74,7 +77,19 @@ docker_compose_mode: '0755'
 <pre><code>
 - name: sample playbook for role 'docker_compose'
   hosts: all
-  become: "{{ molecule['converge']['become'] | default('yes') }}"
+  become: "yes"
+  vars:
+    python_package_install_optional: True
+    pip_site_upgrade: True
+    docker_compose_type: both
+  pre_tasks:
+    - name: Create 'remote_tmp'
+      ansible.builtin.file:
+        path: /root/.ansible/tmp
+        state: directory
+        mode: "0700"
+  roles:
+    - python
   tasks:
     - name: Include role 'docker_compose'
       ansible.builtin.include_role:

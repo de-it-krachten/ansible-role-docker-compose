@@ -5,8 +5,8 @@
 
 - name: Include binary.yml
   ansible.builtin.include_tasks: binary.yml
-  when: docker_compose_type is search('^(binary | both)$')
+  when: docker_compose_type is search('^(binary|both)$')
 
 - name: Include pip.yml
   ansible.builtin.include_tasks: pip.yml
-  when: docker_compose_type is search('^(pip | both)$')
+  when: docker_compose_type is search('^(pip|both)$')
