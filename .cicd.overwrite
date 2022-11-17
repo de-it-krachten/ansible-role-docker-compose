@@ -17,6 +17,9 @@ molecule:
   requirements:
     roles_extra:
       - python
+  prepare:
+    vars:
+      activate_epel: true
   converge:
     vars:
       python_package_install_optional: true
