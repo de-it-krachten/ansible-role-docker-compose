@@ -7,3 +7,4 @@
   environment:
     HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
     HTTP_PROXY: "{{ python_http_proxy | default('') }}"
+  tags: molecule-idempotence-notest

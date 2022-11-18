@@ -1,6 +1,29 @@
 ---
 
 generic:
+  role: ansible-role-docker_compose
+  role_short: docker_compose
   role_description: |
     Installs docker-compose
-    
+  collections: []
+
+# Supported platforms
+platforms:
+  alpine3:
+    ci: true
+    supported: true
+
+molecule:
+  requirements:
+    roles_extra:
+      - python
+  prepare:
+    vars:
+      activate_epel: true
+  converge:
+    vars:
+      python_package_install_optional: true
+      pip_site_upgrade: true
+      docker_compose_type: both
+    roles:
+      - python
