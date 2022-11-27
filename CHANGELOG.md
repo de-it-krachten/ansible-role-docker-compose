@@ -1,3 +1,10 @@
+## [1.4.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.4.0...v1.4.1) (2022-11-27)
+
+
+### Bug Fixes
+
+* Make this role install both binary and pypi package by default ([64e471a](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/64e471a17ed38a98b9de1a02af2aa4e9bd4d3cd2))
+
 # [1.4.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.3.0...v1.4.0) (2022-11-18)
 
 
