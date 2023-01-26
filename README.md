@@ -34,8 +34,8 @@ Supported platforms
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 35
 - Fedora 36
+- Fedora 37
 - Alpine 3
 
 Note:
@@ -45,7 +45,7 @@ Note:
 ### defaults/main.yml
 <pre><code>
 # type of installation (binary/pip/both)
-docker_compose_type: binary
+docker_compose_type: both
 
 # API endpoint to get latest version
 docker_compose_api: https://api.github.com/repos/docker/compose
@@ -82,12 +82,6 @@ docker_compose_mode: '0755'
     python_package_install_optional: True
     pip_site_upgrade: True
     docker_compose_type: both
-  pre_tasks:
-    - name: Create 'remote_tmp'
-      ansible.builtin.file:
-        path: /root/.ansible/tmp
-        state: directory
-        mode: "0700"
   roles:
     - python
   tasks:
