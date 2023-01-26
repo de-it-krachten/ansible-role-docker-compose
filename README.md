@@ -83,7 +83,7 @@ docker_compose_mode: '0755'
     pip_site_upgrade: True
     docker_compose_type: both
   roles:
-    - python
+    - deitkrachten.python
   tasks:
     - name: Include role 'docker_compose'
       ansible.builtin.include_role:
