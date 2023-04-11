@@ -1,5 +1,10 @@
 ---
 
+- name: Assertions
+  ansible.builtin.assert:
+    that:
+      - docker_compose_project_name is defined
+
 - name: Read docker-compose settings from template
   ansible.builtin.set_fact:
     docker_compose_template: >-
@@ -8,8 +13,9 @@
 - name: Get all files/directories to map
   ansible.builtin.set_fact:
     volume_paths: >-
-      {{ docker_compose_template.services |
-         json_query('[].volumes') |
+      {{ docker_compose_template['services'] |
+         dict2items |
+         json_query('[].value.volumes') |
          json_query('[]') |
          select('regex', '^(\./|/)') |
          map('regex_replace', ':.*') |
@@ -56,7 +62,7 @@
 - name: Create docker-compose.yml from template
   ansible.builtin.template:
     src: "{{ docker_compose_template_file }}"
-    dest: "{{ docker_compose_path }}/docker-compose.yml"
+    dest: "{{ docker_compose_project_dir }}/docker-compose.yml"
     mode: "0644"
   notify: Restart docker
 
