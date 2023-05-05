@@ -23,7 +23,7 @@ molecule:
   converge:
     vars:
       python_package_install_optional: true
-      pip_site_upgrade: true
-      docker_compose_type: both
+      # pip_site_upgrade: true
+      docker_compose_type: pip
     roles:
       - deitkrachten.python

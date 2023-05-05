@@ -73,8 +73,6 @@ docker_compose_path: /usr/local/bin/docker-compose
 docker_compose_owner: root
 docker_compose_group: root
 docker_compose_mode: '0755'
-
-docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
 </pre></code>
 
 
@@ -88,8 +86,7 @@ docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project
   become: "yes"
   vars:
     python_package_install_optional: True
-    pip_site_upgrade: True
-    docker_compose_type: both
+    docker_compose_type: pip
   roles:
     - deitkrachten.python
   tasks:

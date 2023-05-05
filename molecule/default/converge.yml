@@ -5,8 +5,7 @@
   become: "yes"
   vars:
     python_package_install_optional: True
-    pip_site_upgrade: True
-    docker_compose_type: both
+    docker_compose_type: pip
   roles:
     - deitkrachten.python
   tasks:
