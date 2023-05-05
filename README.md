@@ -44,6 +44,12 @@ Note:
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
+# Path where docker-compose projects can be found
+docker_compose_root: /export/docker
+
+# Spefic project location
+docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
+
 # type of installation (binary/pip/both)
 docker_compose_type: both
 
@@ -67,6 +73,8 @@ docker_compose_path: /usr/local/bin/docker-compose
 docker_compose_owner: root
 docker_compose_group: root
 docker_compose_mode: '0755'
+
+docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
 </pre></code>
 
 
