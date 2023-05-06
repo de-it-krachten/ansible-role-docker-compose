@@ -1,3 +1,11 @@
+# [1.5.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.4.1...v1.5.0) (2023-05-06)
+
+
+### Features
+
+* Add support for compose files ([b1ab6cd](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/b1ab6cdab71883ea74067f0453825bef60575bcd))
+* Move to namespaced role names ([cad235e](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/cad235e1defe34b6cc1840362e25c49f8a9e1470))
+
 ## [1.4.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.4.0...v1.4.1) (2022-11-27)
 
 
