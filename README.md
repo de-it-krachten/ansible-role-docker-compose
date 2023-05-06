@@ -34,8 +34,8 @@ Supported platforms
 - Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 35
 - Fedora 36
+- Fedora 37
 - Alpine 3
 
 Note:
@@ -44,8 +44,14 @@ Note:
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
+# Path where docker-compose projects can be found
+docker_compose_root: /export/docker
+
+# Spefic project location
+docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
+
 # type of installation (binary/pip/both)
-docker_compose_type: binary
+docker_compose_type: both
 
 # API endpoint to get latest version
 docker_compose_api: https://api.github.com/repos/docker/compose
@@ -80,16 +86,9 @@ docker_compose_mode: '0755'
   become: "yes"
   vars:
     python_package_install_optional: True
-    pip_site_upgrade: True
-    docker_compose_type: both
-  pre_tasks:
-    - name: Create 'remote_tmp'
-      ansible.builtin.file:
-        path: /root/.ansible/tmp
-        state: directory
-        mode: "0700"
+    docker_compose_type: pip
   roles:
-    - python
+    - deitkrachten.python
   tasks:
     - name: Include role 'docker_compose'
       ansible.builtin.include_role:

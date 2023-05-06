@@ -5,16 +5,9 @@
   become: "yes"
   vars:
     python_package_install_optional: True
-    pip_site_upgrade: True
-    docker_compose_type: both
-  pre_tasks:
-    - name: Create 'remote_tmp'
-      ansible.builtin.file:
-        path: /root/.ansible/tmp
-        state: directory
-        mode: "0700"
+    docker_compose_type: pip
   roles:
-    - python
+    - deitkrachten.python
   tasks:
     - name: Include role 'ansible-role-docker_compose'
       ansible.builtin.include_role:

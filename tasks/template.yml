@@ -1,0 +1,70 @@
+---
+
+- name: Assertions
+  ansible.builtin.assert:
+    that:
+      - docker_compose_project_name is defined
+
+- name: Read docker-compose settings from template
+  ansible.builtin.set_fact:
+    docker_compose_template: >-
+      {{ lookup('template', docker_compose_template_file) | from_yaml }}
+
+- name: Get all files/directories to map
+  ansible.builtin.set_fact:
+    volume_paths: >-
+      {{ docker_compose_template['services'] |
+         dict2items |
+         json_query('[].value.volumes') |
+         json_query('[]') |
+         select('regex', '^(\./|/)') |
+         map('regex_replace', ':.*') |
+         list }}
+
+- name: Make sure no relative paths are used
+  ansible.builtin.fail:
+    msg: "Relative paths in volume names!"
+  when: volume_paths is search('^\./')
+
+- name: Get status of all these files/directories
+  ansible.builtin.stat:
+    path: "{{ path }}"
+  loop: "{{ volume_paths }}"
+  loop_control:
+    loop_var: path
+  register: __stat
+
+- name: Create directories that do not exist
+  ansible.builtin.file:
+    path: "{{ volume_path.path }}"
+    state: directory
+    owner: root
+    group: "{{ docker_group | default('root') }}"
+    mode: "0755"
+  loop: "{{ __stat.results }}"
+  loop_control:
+    loop_var: volume_path
+    label:
+      - "{{ volume_path.path }}"
+  when: not volume_path.stat.exists or volume_path.stat.isdir
+  notify: Restart docker
+
+- name: Create files from template
+  ansible.builtin.template:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+    mode: "{{ item.mode | default('0644') }}"
+  loop: "{{ docker_compose_files | default([]) }}"
+  notify: Restart docker
+
+- name: Create docker-compose.yml from template
+  ansible.builtin.template:
+    src: "{{ docker_compose_template_file }}"
+    dest: "{{ docker_compose_project_dir }}/docker-compose.yml"
+    mode: "0644"
+  notify: Restart docker
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers

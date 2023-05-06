@@ -1,0 +1,73 @@
+---
+version: '3'
+
+{% for service in docker_compose_template.services %}
+{% if loop.index == 1 %}
+services:
+{% endif %}
+  {{ service.name }}:
+    image: "{{ service.image }}"
+    restart: "{{ service.restart | default('unless-stopped') }}"
+{% if service.env_file is defined %}
+    env_file: "{{ service.env_file }}"
+{% endif %}
+{% if service.command is defined %}
+    command: "{{ service.command }}"
+{% endif %}
+{% for dep in service.depends_on | default([]) %}
+{% if loop.index == 1 %}
+depends_on:
+      - "{{ dep }}"
+{% endif %}
+{% endfor %}
+{% for volume in service.volumes | default([]) %}
+{% if loop.index == 1 %}
+    volumes:
+{% endif %}
+      - "{{ volume }}"
+{% endfor %}
+{% for port in service.ports | default([]) %}
+{% if loop.index == 1 %}
+    ports:
+{% endif %}
+      - "{{ port }}"
+{% endfor %}
+{% for port in service.expose | default([]) %}
+{% if loop.index == 1 %}
+    expose:
+{% endif %}
+      - "{{ port }}"
+{% endfor %}
+{% for env in service.environment | default([]) %}
+{% if loop.index == 1 %}
+    environment:
+{% endif %}
+      - {{ env }}
+{% endfor %}
+{% for network in service.networks | default([]) %}
+{% if loop.index == 1 %}
+    networks:
+{% endif %}
+      - {{ network }}
+{% endfor %}
+{% endfor %}
+
+{% for volume in docker_compose_template.volumes | default([]) %}
+{% if loop.index == 1 %}
+volumes:
+{% endif %}
+  {{ volume.name }}:
+{% endfor %}
+
+{% for network in docker_compose_template.networks | default([]) %}
+{% if loop.index == 1 %}
+networks:
+{% endif %}
+  {{ network.name }}:
+{% if network.external is defined %}
+    external: {{ network.external | lower }}
+{% endif %}
+{% if network.driver is defined %}
+    driver: {{ network.driver | lower }}
+{% endif %}
+{% endfor %}

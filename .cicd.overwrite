@@ -16,14 +16,14 @@ platforms:
 molecule:
   requirements:
     roles_extra:
-      - python
+      - deitkrachten.python
   prepare:
     vars:
       activate_epel: true
   converge:
     vars:
       python_package_install_optional: true
-      pip_site_upgrade: true
-      docker_compose_type: both
+      # pip_site_upgrade: true
+      docker_compose_type: pip
     roles:
-      - python
+      - deitkrachten.python
