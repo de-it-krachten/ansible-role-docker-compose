@@ -47,7 +47,6 @@
     label:
       - "{{ volume_path.path }}"
   when: not volume_path.stat.exists or volume_path.stat.isdir
-  notify: Restart docker
 
 - name: Create files from template
   ansible.builtin.template:
@@ -57,14 +56,18 @@
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
   loop: "{{ docker_compose_files | default([]) }}"
-  notify: Restart docker
+  register: __dc1
 
 - name: Create docker-compose.yml from template
   ansible.builtin.template:
     src: "{{ docker_compose_template_file }}"
     dest: "{{ docker_compose_project_dir }}/docker-compose.yml"
     mode: "0644"
-  notify: Restart docker
+  register: __dc2
 
-- name: Flush handlers
-  ansible.builtin.meta: flush_handlers
+- name: Initialize docker-compose project  # noqa no-handler
+  community.docker.docker_compose:
+    project_src: "{{ docker_compose_project_dir }}"
+    build: false
+    restarted: true
+  when: docker_comport_restart | bool or __dc1.changed or __dc2.changed

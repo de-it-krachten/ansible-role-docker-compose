@@ -1,7 +1,7 @@
 ---
 
-- name: Restart docker
+- name: Initialize docker-compose project
   community.docker.docker_compose:
-    project_src: "{{ docker_compose_path }}"
+    project_src: "{{ docker_compose_project_dir }}"
     build: false
     restarted: true
