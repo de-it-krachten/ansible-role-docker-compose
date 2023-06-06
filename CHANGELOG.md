@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.5.0...v1.5.1) (2023-06-06)
+
+
+### Bug Fixes
+
+* Stop using handlers for restarting containers ([bd64c74](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/bd64c74e391496585991bfb47815ff9b496cce80))
+
 # [1.5.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.4.1...v1.5.0) (2023-05-06)
 
 
