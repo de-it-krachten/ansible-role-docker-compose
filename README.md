@@ -31,7 +31,6 @@ Supported platforms
 - AlmaLinux 9
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
-- Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
 - Fedora 36
@@ -73,6 +72,9 @@ docker_compose_path: /usr/local/bin/docker-compose
 docker_compose_owner: root
 docker_compose_group: root
 docker_compose_mode: '0755'
+
+# Force restart of the project
+docker_compose_restart: false
 </pre></code>
 
 
