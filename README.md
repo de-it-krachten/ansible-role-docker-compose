@@ -31,11 +31,10 @@ Supported platforms
 - AlmaLinux 9
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
-- Ubuntu 18.04 LTS
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 36
 - Fedora 37
+- Fedora 38
 - Alpine 3
 
 Note:
@@ -44,11 +43,9 @@ Note:
 ## Role Variables
 ### defaults/main.yml
 <pre><code>
-# Path where docker-compose projects can be found
-docker_compose_root: /export/docker
-
-# Spefic project location
-docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
+# -----------------------------------------------------------------------------
+# Install
+# -----------------------------------------------------------------------------
 
 # type of installation (binary/pip/both)
 docker_compose_type: both
@@ -73,6 +70,23 @@ docker_compose_path: /usr/local/bin/docker-compose
 docker_compose_owner: root
 docker_compose_group: root
 docker_compose_mode: '0755'
+
+
+# -----------------------------------------------------------------------------
+# Template
+# -----------------------------------------------------------------------------
+
+# Path where docker-compose projects can be found
+docker_compose_root: /export/docker
+
+# Spefifies project location
+docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
+
+# Should the latest image be pulled during project start/restart
+docker_compose_pull: false
+
+# Force restart of the project (by default only when a change is found)
+docker_compose_restart: false
 </pre></code>
 
 
