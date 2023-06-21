@@ -65,9 +65,18 @@
     mode: "0644"
   register: __dc2
 
-- name: Initialize docker-compose project  # noqa no-handler
-  community.docker.docker_compose:
-    project_src: "{{ docker_compose_project_dir }}"
-    build: false
-    restarted: true
+- name: Restart the project  # noqa no-handler
   when: docker_compose_restart | bool or __dc1.changed or __dc2.changed
+  block:
+
+    - name: Stop the docker-compose project
+      community.docker.docker_compose:
+        state: absent
+        project_src: "{{ docker_compose_project_dir }}"
+
+    - name: Initialize docker-compose project
+      community.docker.docker_compose:
+        state: present
+        project_src: "{{ docker_compose_project_dir }}"
+        build: false
+        pull: "{{ docker_compose_pull }}"
