@@ -1,3 +1,17 @@
+# [1.6.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.5.1...v1.6.0) (2023-06-21)
+
+
+### Bug Fixes
+
+* Fix type in restart variable name ([b160f40](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/b160f40020ee010f0cd2fd7fe8e104a29c8b7ba0))
+
+
+### Features
+
+* Add support for Fedora 38 ([207b387](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/207b3878a0d86602efee51f6efde628db5c77c27))
+* Remove support for Fedora 36 ([b51769d](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/b51769d13a48c1960f98757a07973e1a5e485195))
+* Remove support for Ubuntu 18.04 LTS ([72bf5b7](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/72bf5b7069bfb11eedd55713a7367df144233fa7))
+
 ## [1.5.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.5.0...v1.5.1) (2023-06-06)
 
 
