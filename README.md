@@ -33,8 +33,8 @@ Supported platforms
 - Debian 11 (Bullseye)
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
-- Fedora 36
 - Fedora 37
+- Fedora 38
 - Alpine 3
 
 Note:
