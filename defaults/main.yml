@@ -29,3 +29,6 @@ docker_compose_path: /usr/local/bin/docker-compose
 docker_compose_owner: root
 docker_compose_group: root
 docker_compose_mode: '0755'
+
+# Force restart of the project
+docker_compose_restart: false

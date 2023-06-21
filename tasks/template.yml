@@ -70,4 +70,4 @@
     project_src: "{{ docker_compose_project_dir }}"
     build: false
     restarted: true
-  when: docker_comport_restart | bool or __dc1.changed or __dc2.changed
+  when: docker_compose_restart | bool or __dc1.changed or __dc2.changed
