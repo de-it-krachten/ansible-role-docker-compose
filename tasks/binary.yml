@@ -85,9 +85,9 @@
   ansible.builtin.get_url:
     url: "{{ docker_compose_bin_url }}"
     dest: "{{ docker_compose_path }}"
-    owner: "{{ docker_compose_owner }}"
-    group: "{{ docker_compose_group }}"
-    mode: "{{ docker_compose_mode }}"
+    owner: "{{ docker_compose_bin_owner | default('root') }}"
+    group: "{{ docker_compose_bin_group | default('root') }}"
+    mode: "{{ docker_compose_bin_mode | default('0755') }}"
   environment:
     https_proxy: "{{ https_proxy | default('') }}"
     http_proxy: "{{ http_proxy | default('') }}"

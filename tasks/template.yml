@@ -36,20 +36,20 @@
   register: __stat
 
 - name: Create the main project directory
-  file:
+  ansible.builtin.file:
     path: "{{ docker_compose_project_dir }}"
     state: directory
     owner: root
     group: "{{ docker_group | default('root') }}"
-    mode: "0755"
+    mode: "0750"
 
 - name: Create directories that do not exist
   ansible.builtin.file:
     path: "{{ volume_path.path }}"
     state: directory
-    owner: root
-    group: "{{ docker_group | default('root') }}"
-    mode: "0755"
+    owner: "{{ docker_compose_owner | default('root') }}"
+    group: "{{ docker_compose_group | default(docker_group) | default('root') }}"
+    mode: "{{ docker_compose_mode | default('0750') }}"
   loop: "{{ __stat.results }}"
   loop_control:
     loop_var: volume_path
