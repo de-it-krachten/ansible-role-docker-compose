@@ -29,6 +29,8 @@ Supported platforms
 - OracleLinux 9
 - AlmaLinux 8
 - AlmaLinux 9
+- SUSE Linux Enterprise<sup>1</sup>
+- openSUSE Leap 15
 - Debian 10 (Buster)
 - Debian 11 (Bullseye)
 - Ubuntu 20.04 LTS
@@ -67,6 +69,8 @@ docker_compose_platform: "{{ ansible_system | lower }}-{{ ansible_architecture }
 
 # Target location/ownership/permissions for the binary
 docker_compose_path: /usr/local/bin/docker-compose
+
+# Default permissions for data directories
 docker_compose_owner: root
 docker_compose_group: root
 docker_compose_mode: '0755'
