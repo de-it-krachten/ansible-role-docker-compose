@@ -1,3 +1,16 @@
+# [1.7.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.6.0...v1.7.0) (2023-07-07)
+
+
+### Bug Fixes
+
+* Add project directory creation ([c8c82e2](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/c8c82e2ec98fa4fa072cd8265c883f95c8040fcd))
+* Restrict directories by stripping permissions for others by default ([3f15a90](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/3f15a90bad3aa06bd67b87d446cca2e852e155dc))
+
+
+### Features
+
+* Add support for SLES/OpenSUSE Leap 15 ([af6e8ff](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/af6e8ffa19e483d80e612005411b3b82862bf2e6))
+
 # [1.6.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.5.1...v1.6.0) (2023-06-21)
 
 
