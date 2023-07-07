@@ -1,5 +1,6 @@
 ---
 
+# Generic
 generic:
   role: ansible-role-docker_compose
   role_short: docker_compose
@@ -12,7 +13,14 @@ platforms:
   alpine3:
     ci: true
     supported: true
+  opensuse15:
+    ci: true
+    supported: true
+  sles15:
+    ci: false
+    supported: true
 
+# Molecule
 molecule:
   requirements:
     roles_extra:
