@@ -1,3 +1,10 @@
+# [1.8.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.7.0...v1.8.0) (2023-08-30)
+
+
+### Features
+
+* Update supported platforms & CI ([a67803c](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/a67803c5fb4bf4aedcdd4b4f4c4024ddfaa1ef58))
+
 # [1.7.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.6.0...v1.7.0) (2023-07-07)
 
 
