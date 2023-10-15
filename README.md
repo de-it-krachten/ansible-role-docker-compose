@@ -31,7 +31,6 @@ Supported platforms
 - AlmaLinux 9
 - SUSE Linux Enterprise 15<sup>1</sup>
 - openSUSE Leap 15
-- Debian 10 (Buster)<sup>1</sup>
 - Debian 11 (Bullseye)
 - Debian 12 (Bookworm)<sup>1</sup>
 - Ubuntu 20.04 LTS
@@ -92,6 +91,9 @@ docker_compose_pull: false
 
 # Force restart of the project (by default only when a change is found)
 docker_compose_restart: false
+
+# Execute template code as root
+docker_compose_become: no
 </pre></code>
 
 

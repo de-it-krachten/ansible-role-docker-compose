@@ -47,3 +47,5 @@ docker_compose_pull: false
 # Force restart of the project (by default only when a change is found)
 docker_compose_restart: false
 
+# Execute template code as root
+docker_compose_become: no

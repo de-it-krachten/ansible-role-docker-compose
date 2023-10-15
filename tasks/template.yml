@@ -30,6 +30,7 @@
 - name: Get status of all these files/directories
   ansible.builtin.stat:
     path: "{{ path }}"
+  become: "{{ docker_compose_become }}"
   loop: "{{ volume_paths }}"
   loop_control:
     loop_var: path
@@ -42,6 +43,7 @@
     owner: root
     group: "{{ docker_group | default('root') }}"
     mode: "0750"
+  become: "{{ docker_compose_become }}"
 
 - name: Create directories that do not exist
   ansible.builtin.file:
@@ -50,11 +52,11 @@
     owner: "{{ docker_compose_owner | default('root') }}"
     group: "{{ docker_compose_group | default(docker_group) | default('root') }}"
     mode: "{{ docker_compose_mode | default('0750') }}"
+  become: "{{ docker_compose_become }}"
   loop: "{{ __stat.results }}"
   loop_control:
     loop_var: volume_path
-    label:
-      - "{{ volume_path.path }}"
+    label: "{{ volume_path.path }}"
   when: not volume_path.stat.exists or volume_path.stat.isdir
 
 - name: Create files from template
@@ -64,6 +66,7 @@
     owner: "{{ item.owner | default('root') }}"
     group: "{{ item.group | default('root') }}"
     mode: "{{ item.mode | default('0644') }}"
+  become: "{{ docker_compose_become }}"
   loop: "{{ docker_compose_files | default([]) }}"
   register: __dc1
 
@@ -72,9 +75,11 @@
     src: "{{ docker_compose_template_file }}"
     dest: "{{ docker_compose_project_dir }}/docker-compose.yml"
     mode: "0644"
+  become: "{{ docker_compose_become }}"
   register: __dc2
 
 - name: Restart the project  # noqa no-handler
+  become: "{{ docker_compose_become }}"
   when: docker_compose_restart | bool or __dc1.changed or __dc2.changed
   block:
 
