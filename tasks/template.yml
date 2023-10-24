@@ -40,8 +40,8 @@
   ansible.builtin.file:
     path: "{{ docker_compose_project_dir }}"
     state: directory
-    owner: root
-    group: "{{ docker_group | default('root') }}"
+    owner: "{{ 'root' if (docker_compose_become | bool) else omit }}"
+    group: "{{ (docker_group | default('root')) if (docker_compose_become | bool) else omit }}"
     mode: "0750"
   become: "{{ docker_compose_become }}"
 
