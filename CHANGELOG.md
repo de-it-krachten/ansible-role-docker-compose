@@ -1,3 +1,10 @@
+## [1.8.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.8.0...v1.8.1) (2023-10-25)
+
+
+### Bug Fixes
+
+* Execute template code as root (optionally) ([73e63ee](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/73e63ee807ff1b57c1b734b0aa01a3df696d8f1f))
+
 # [1.8.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.7.0...v1.8.0) (2023-08-30)
 
 
