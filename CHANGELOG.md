@@ -1,3 +1,10 @@
+# [1.9.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.8.1...v1.9.0) (2023-11-03)
+
+
+### Features
+
+* Add support for docker-compose in python virtual environment ([edaaed7](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/edaaed7471f47e1d038c5c82dd2ac59655ab6302))
+
 ## [1.8.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.8.0...v1.8.1) (2023-10-25)
 
 
