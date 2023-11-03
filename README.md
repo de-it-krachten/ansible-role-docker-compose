@@ -13,7 +13,7 @@ Installs docker-compose
 None
 
 #### Collections
-- community.general
+- community.docker
 
 ## Platforms
 
@@ -51,6 +51,12 @@ Note:
 
 # type of installation (binary/pip/both)
 docker_compose_type: both
+
+# Should docker-compose be installed into a venv
+docker_compose_pipinvenv: false
+
+# Set virtual environment location
+docker_compose_venv: /usr/local/venv/docker-compose
 
 # API endpoint to get latest version
 docker_compose_api: https://api.github.com/repos/docker/compose
@@ -104,9 +110,9 @@ docker_compose_become: no
 <pre><code>
 - name: sample playbook for role 'docker_compose'
   hosts: all
-  become: "yes"
+  become: 'yes'
   vars:
-    python_package_install_optional: True
+    python_package_install_optional: true
     docker_compose_type: pip
   roles:
     - deitkrachten.python
