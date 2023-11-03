@@ -10,7 +10,15 @@
 
 - name: Include pip.yml
   ansible.builtin.include_tasks: pip.yml
-  when: docker_compose_type is search('^(pip|both)$')
+  when:
+    - docker_compose_type is search('^(pip|both)$')
+    - not docker_compose_pipinvenv | bool
+
+- name: Include pip-venv.yml
+  ansible.builtin.include_tasks: pip-venv.yml
+  when:
+    - docker_compose_type is search('^(pip|both)$')
+    - docker_compose_pipinvenv | bool
 
 - name: Include template.yml
   ansible.builtin.include_tasks: template.yml

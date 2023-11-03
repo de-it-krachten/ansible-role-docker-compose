@@ -7,6 +7,12 @@
 # type of installation (binary/pip/both)
 docker_compose_type: both
 
+# Should docker-compose be installed into a venv
+docker_compose_pipinvenv: false
+
+# Set virtual environment location
+docker_compose_venv: /usr/local/venv/docker-compose
+
 # API endpoint to get latest version
 docker_compose_api: https://api.github.com/repos/docker/compose
 

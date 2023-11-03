@@ -1,0 +1,40 @@
+---
+
+- name: Create virtual environment
+  ansible.builtin.pip:
+    name:
+      - pip
+      - wheel
+      - setuptools
+      - setuptools_rust
+    state: present
+    virtualenv: "{{ docker_compose_venv }}"
+    virtualenv_command: "python3 -m venv"
+    extra_args: "--upgrade"
+  become: yes
+
+- name: Install pyyaml / cython into virtual environment
+  ansible.builtin.pip:
+    name:
+      - "cython<3.0.0"
+      - "pyyaml<6"
+    state: present
+    executable: "{{ docker_compose_venv }}/bin/pip3"
+    extra_args: "--no-build-isolation"
+  become: yes
+
+- name: Install docker-compose via pip
+  ansible.builtin.pip:
+    name: docker-compose
+    state: present
+    executable: "{{ docker_compose_venv }}/bin/pip3"
+  become: yes
+
+- name: Create symbolic link in /usr/local/bin
+  ansible.builtin.file:
+    src: "{{ docker_compose_venv }}/bin/docker-compose"
+    dest: /usr/local/bin/docker-compose
+    owner: root
+    group: root
+    state: link
+    force: true
