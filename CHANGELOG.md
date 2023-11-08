@@ -1,3 +1,10 @@
+## [1.9.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.9.0...v1.9.1) (2023-11-08)
+
+
+### Bug Fixes
+
+* Make it possible to choose python version for venv ([4899aa5](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/4899aa5a60817f64a277004e03c67e53f53c318c))
+
 # [1.9.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.8.1...v1.9.0) (2023-11-03)
 
 
