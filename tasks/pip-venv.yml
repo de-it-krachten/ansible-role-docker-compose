@@ -8,8 +8,8 @@
       - setuptools
       - setuptools_rust
     state: present
-    virtualenv: "{{ docker_compose_venv }}"
-    virtualenv_command: "python3 -m venv"
+    virtualenv: "{{ docker_compose_venv_path }}"
+    virtualenv_command: "{{ docker_compose_venv_python }} -m venv"
     extra_args: "--upgrade"
   become: yes
 
@@ -19,7 +19,7 @@
       - "cython<3.0.0"
       - "pyyaml<6"
     state: present
-    executable: "{{ docker_compose_venv }}/bin/pip3"
+    executable: "{{ docker_compose_venv_path }}/bin/pip3"
     extra_args: "--no-build-isolation"
   become: yes
 
@@ -27,12 +27,12 @@
   ansible.builtin.pip:
     name: docker-compose
     state: present
-    executable: "{{ docker_compose_venv }}/bin/pip3"
+    executable: "{{ docker_compose_venv_path }}/bin/pip3"
   become: yes
 
 - name: Create symbolic link in /usr/local/bin
   ansible.builtin.file:
-    src: "{{ docker_compose_venv }}/bin/docker-compose"
+    src: "{{ docker_compose_venv_path }}/bin/docker-compose"
     dest: /usr/local/bin/docker-compose
     owner: root
     group: root

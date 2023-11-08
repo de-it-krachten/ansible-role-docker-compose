@@ -11,7 +11,10 @@ docker_compose_type: both
 docker_compose_pipinvenv: false
 
 # Set virtual environment location
-docker_compose_venv: /usr/local/venv/docker-compose
+docker_compose_venv_path: /usr/local/venv/docker-compose
+
+# Python to use for docker-compose in venv
+docker_compose_venv_python: /usr/bin/python3
 
 # API endpoint to get latest version
 docker_compose_api: https://api.github.com/repos/docker/compose
