@@ -13,7 +13,7 @@ Installs docker-compose
 None
 
 #### Collections
-- community.docker
+- {'name': 'community.docker'}
 
 ## Platforms
 

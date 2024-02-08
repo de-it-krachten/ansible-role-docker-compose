@@ -25,7 +25,9 @@
 
 - name: Install docker-compose via pip
   ansible.builtin.pip:
-    name: docker-compose
+    name:
+      - "docker<7"
+      - docker-compose
     state: present
     executable: "{{ docker_compose_venv_path }}/bin/pip3"
   become: yes
