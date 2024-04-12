@@ -1,3 +1,11 @@
+## [1.9.2](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.9.1...v1.9.2) (2024-04-12)
+
+
+### Bug Fixes
+
+* Defaults to pip version only in virtual environment ([91dfe2c](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/91dfe2caee23fa18b327ca708b49d251efd0ef47))
+* pin venv to docker<7 ([cef5b28](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/cef5b28e67a52821649ce0fad3e9d75d48798539))
+
 ## [1.9.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.9.0...v1.9.1) (2023-11-08)
 
 
