@@ -5,10 +5,10 @@
 # -----------------------------------------------------------------------------
 
 # type of installation (binary/pip/both)
-docker_compose_type: both
+docker_compose_type: pip
 
 # Should docker-compose be installed into a venv
-docker_compose_pipinvenv: false
+docker_compose_pipinvenv: true
 
 # Set virtual environment location
 docker_compose_venv_path: /usr/local/venv/docker-compose
@@ -47,7 +47,7 @@ docker_compose_mode: '0755'
 # Path where docker-compose projects can be found
 docker_compose_root: /export/docker
 
-# Spefifies project location
+# Specifies project location
 docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
 
 # Should the latest image be pulled during project start/restart

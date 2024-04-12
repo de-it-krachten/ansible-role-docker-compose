@@ -12,6 +12,9 @@
     virtualenv_command: "{{ docker_compose_venv_python }} -m venv"
     extra_args: "--upgrade"
   become: yes
+  environment:
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
 
 - name: Install pyyaml / cython into virtual environment
   ansible.builtin.pip:
@@ -22,13 +25,21 @@
     executable: "{{ docker_compose_venv_path }}/bin/pip3"
     extra_args: "--no-build-isolation"
   become: yes
+  environment:
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
 
 - name: Install docker-compose via pip
   ansible.builtin.pip:
-    name: docker-compose
+    name:
+      - "docker<7"
+      - docker-compose
     state: present
     executable: "{{ docker_compose_venv_path }}/bin/pip3"
   become: yes
+  environment:
+    HTTPS_PROXY: "{{ python_https_proxy | default('') }}"
+    HTTP_PROXY: "{{ python_http_proxy | default('') }}"
 
 - name: Create symbolic link in /usr/local/bin
   ansible.builtin.file:
