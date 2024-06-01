@@ -1,3 +1,10 @@
+# [1.10.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.9.2...v1.10.0) (2024-06-01)
+
+
+### Features
+
+* Add support for Ubuntu 24.04 LTS + Fedora 40 ([fa4bd00](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/fa4bd009753708a0ec74f8d99bbc19707418f245))
+
 ## [1.9.2](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.9.1...v1.9.2) (2024-04-12)
 
 
