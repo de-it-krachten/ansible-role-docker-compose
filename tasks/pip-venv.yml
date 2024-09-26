@@ -33,7 +33,8 @@
   ansible.builtin.pip:
     name:
       - "docker<7"
-      - docker-compose
+      - "docker-compose"
+      - "requests<2.32"
     state: present
     executable: "{{ docker_compose_venv_path }}/bin/pip3"
   become: yes

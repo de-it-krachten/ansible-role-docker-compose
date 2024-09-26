@@ -84,13 +84,13 @@
   block:
 
     - name: Stop the docker-compose project
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         state: absent
         project_src: "{{ docker_compose_project_dir }}"
 
     - name: Initialize docker-compose project
-      community.docker.docker_compose:
+      community.docker.docker_compose_v2:
         state: present
         project_src: "{{ docker_compose_project_dir }}"
-        build: false
+        build: "{{ docker_compose_build }}"
         pull: "{{ docker_compose_pull }}"
