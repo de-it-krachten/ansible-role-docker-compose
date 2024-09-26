@@ -50,8 +50,11 @@ docker_compose_root: /export/docker
 # Specifies project location
 docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
 
-# Should the latest image be pulled during project start/restart
-docker_compose_pull: false
+# Should the latest image be pulled during project start/restart (always, missing)
+docker_compose_pull: missing
+
+# Should the latest image be build during project start/restart (always, missing)
+docker_compose_build: never
 
 # Force restart of the project (by default only when a change is found)
 docker_compose_restart: false
