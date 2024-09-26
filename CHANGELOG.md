@@ -1,3 +1,11 @@
+## [1.10.1](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.10.0...v1.10.1) (2024-09-26)
+
+
+### Bug Fixes
+
+* Change docker_compose -> docker_compose_v2 due to decrecation ([68de567](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/68de5675bb3e36e3cedeabe2b4b8da7abf3cf222))
+* pin requests<2.32 due to issues ([da6fc0d](https://github.com/de-it-krachten/ansible-role-docker_compose/commit/da6fc0d0608a1ff93afbdabd2cd3a76c4e8034c9))
+
 # [1.10.0](https://github.com/de-it-krachten/ansible-role-docker_compose/compare/v1.9.2...v1.10.0) (2024-06-01)
 
 
