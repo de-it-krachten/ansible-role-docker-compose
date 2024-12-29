@@ -19,10 +19,8 @@ None
 
 Supported platforms
 
-- Red Hat Enterprise Linux 7<sup>1</sup>
 - Red Hat Enterprise Linux 8<sup>1</sup>
 - Red Hat Enterprise Linux 9<sup>1</sup>
-- CentOS 7
 - RockyLinux 8
 - RockyLinux 9
 - OracleLinux 8
@@ -36,8 +34,8 @@ Supported platforms
 - Ubuntu 20.04 LTS
 - Ubuntu 22.04 LTS
 - Ubuntu 24.04 LTS
-- Fedora 39<sup>1</sup>
 - Fedora 40<sup>1</sup>
+- Fedora 41<sup>1</sup>
 - Alpine 3<sup>1</sup>
 
 Note:
@@ -96,8 +94,11 @@ docker_compose_root: /export/docker
 # Specifies project location
 docker_compose_project_dir: "{{ docker_compose_root }}/{{ docker_compose_project_name }}"
 
-# Should the latest image be pulled during project start/restart
-docker_compose_pull: false
+# Should the latest image be pulled during project start/restart (always, missing)
+docker_compose_pull: missing
+
+# Should the latest image be build during project start/restart (always, missing)
+docker_compose_build: never
 
 # Force restart of the project (by default only when a change is found)
 docker_compose_restart: false
